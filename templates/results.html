@@ -1,0 +1,407 @@
+{% extends "base.html" %}
+
+{% set show_progress = true %}
+{% set current_step = 3 %}
+
+{% block title %}Verification Results - DigiBharat{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <!-- Results Card -->
+        <div class="card result-card">
+            <div class="card-body">
+                {% if verification_session %}
+                    {% if verification_session.verification_status == 'verified' %}
+                        <!-- Success Result -->
+                        <div class="text-center mb-4">
+                            <div class="result-icon success bounce-in">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h2 class="result-title text-success">
+                                <span data-en="Verification Successful!" data-hi="सत्यापन सफल!">
+                                    Verification Successful!
+                                </span>
+                            </h2>
+                            <p class="lead text-muted">
+                                <span data-en="Your identity has been successfully verified" data-hi="आपकी पहचान सफलतापूर्वक सत्यापित हो गई है">
+                                    Your identity has been successfully verified
+                                </span>
+                            </p>
+                        </div>
+                    {% else %}
+                        <!-- Failed Result -->
+                        <div class="text-center mb-4">
+                            <div class="result-icon error bounce-in">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <h2 class="result-title text-danger">
+                                <span data-en="Verification Failed" data-hi="सत्यापन असफल">
+                                    Verification Failed
+                                </span>
+                            </h2>
+                            <p class="lead text-muted">
+                                <span data-en="We couldn't verify your identity. Please try again." data-hi="हम आपकी पहचान सत्यापित नहीं कर सके। कृपया पुनः प्रयास करें।">
+                                    We couldn't verify your identity. Please try again.
+                                </span>
+                            </p>
+                        </div>
+                    {% endif %}
+
+                    <!-- Detailed Results -->
+                    <div class="result-details">
+                        <div class="row">
+                            <!-- Personal Information -->
+                            <div class="col-md-6 mb-4">
+                                <div class="card h-100">
+                                    <div class="card-header bg-primary text-white">
+                                        <h6 class="mb-0">
+                                            <i class="fas fa-user me-2"></i>
+                                            <span data-en="Personal Information" data-hi="व्यक्तिगत जानकारी">
+                                                Personal Information
+                                            </span>
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        {% if verification_session.extracted_name %}
+                                        <div class="mb-3">
+                                            <strong>
+                                                <span data-en="Name:" data-hi="नाम:">Name:</span>
+                                            </strong><br>
+                                            <span class="text-muted">{{ verification_session.extracted_name }}</span>
+                                        </div>
+                                        {% endif %}
+                                        
+                                        {% if verification_session.extracted_dob %}
+                                        <div class="mb-3">
+                                            <strong>
+                                                <span data-en="Date of Birth:" data-hi="जन्म तिथि:">Date of Birth:</span>
+                                            </strong><br>
+                                            <span class="text-muted">{{ verification_session.extracted_dob }}</span>
+                                        </div>
+                                        {% endif %}
+                                        
+                                        {% if verification_session.extracted_age %}
+                                        <div class="mb-3">
+                                            <strong>
+                                                <span data-en="Age:" data-hi="आयु:">Age:</span>
+                                            </strong><br>
+                                            <span class="text-muted">
+                                                {{ verification_session.extracted_age }} years
+                                                {% if verification_session.extracted_age >= 18 %}
+                                                    <span class="badge bg-success ms-2">
+                                                        <span data-en="Adult" data-hi="वयस्क">Adult</span>
+                                                    </span>
+                                                {% else %}
+                                                    <span class="badge bg-warning ms-2">
+                                                        <span data-en="Minor" data-hi="नाबालिग">Minor</span>
+                                                    </span>
+                                                {% endif %}
+                                            </span>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Verification Scores -->
+                            <div class="col-md-6 mb-4">
+                                <div class="card h-100">
+                                    <div class="card-header bg-info text-white">
+                                        <h6 class="mb-0">
+                                            <i class="fas fa-chart-line me-2"></i>
+                                            <span data-en="Verification Scores" data-hi="सत्यापन स्कोर">
+                                                Verification Scores
+                                            </span>
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        {% if verification_session.face_match_confidence is not none %}
+                                        <div class="mb-4">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <strong>
+                                                    <span data-en="Face Match:" data-hi="चेहरा मिलान:">Face Match:</span>
+                                                </strong>
+                                                <span class="confidence-score">
+                                                    {{ "%.0f"|format(verification_session.face_match_confidence * 100) }}%
+                                                </span>
+                                            </div>
+                                            <div class="confidence-bar">
+                                                <div class="confidence-fill" 
+                                                     style="width: {{ verification_session.face_match_confidence * 100 }}%">
+                                                </div>
+                                            </div>
+                                            <small class="text-muted">
+                                                {% if verification_session.face_match_confidence >= 0.8 %}
+                                                    <span data-en="Excellent match" data-hi="उत्कृष्ट मिलान">Excellent match</span>
+                                                {% elif verification_session.face_match_confidence >= 0.6 %}
+                                                    <span data-en="Good match" data-hi="अच्छा मिलान">Good match</span>
+                                                {% elif verification_session.face_match_confidence >= 0.4 %}
+                                                    <span data-en="Fair match" data-hi="औसत मिलान">Fair match</span>
+                                                {% else %}
+                                                    <span data-en="Poor match" data-hi="खराब मिलान">Poor match</span>
+                                                {% endif %}
+                                            </small>
+                                        </div>
+                                        {% endif %}
+
+                                        <!-- Overall Status -->
+                                        <div class="text-center">
+                                            {% if verification_session.verification_status == 'verified' %}
+                                                <div class="badge bg-success fs-6 p-3">
+                                                    <i class="fas fa-shield-alt me-2"></i>
+                                                    <span data-en="VERIFIED" data-hi="सत्यापित">VERIFIED</span>
+                                                </div>
+                                            {% else %}
+                                                <div class="badge bg-danger fs-6 p-3">
+                                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                                    <span data-en="NOT VERIFIED" data-hi="सत्यापित नहीं">NOT VERIFIED</span>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Error Message (if any) -->
+                        {% if verification_session.error_message %}
+                        <div class="alert alert-danger">
+                            <h6>
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <span data-en="Error Details:" data-hi="त्रुटि विवरण:">Error Details:</span>
+                            </h6>
+                            <p class="mb-0">{{ verification_session.error_message }}</p>
+                        </div>
+                        {% endif %}
+
+                        <!-- Age Verification Result -->
+                        {% if verification_session.extracted_age %}
+                        <div class="alert {% if verification_session.extracted_age >= 18 %}alert-success{% else %}alert-warning{% endif %}">
+                            <h6>
+                                <i class="fas fa-birthday-cake me-2"></i>
+                                <span data-en="Age Verification:" data-hi="आयु सत्यापन:">Age Verification:</span>
+                            </h6>
+                            <p class="mb-0">
+                                {% if verification_session.extracted_age >= 18 %}
+                                    <span data-en="✅ This person is 18 years or older and eligible for age-restricted services." 
+                                          data-hi="✅ यह व्यक्ति 18 वर्ष या उससे अधिक आयु का है और आयु-प्रतिबंधित सेवाओं के लिए योग्य है।">
+                                        ✅ This person is 18 years or older and eligible for age-restricted services.
+                                    </span>
+                                {% else %}
+                                    <span data-en="⚠️ This person is under 18 years old and may not be eligible for certain services." 
+                                          data-hi="⚠️ यह व्यक्ति 18 वर्ष से कम आयु का है और कुछ सेवाओं के लिए योग्य नहीं हो सकता।">
+                                        ⚠️ This person is under 18 years old and may not be eligible for certain services.
+                                    </span>
+                                {% endif %}
+                            </p>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Timestamp -->
+                    <div class="text-center mt-4">
+                        <small class="text-muted">
+                            <i class="fas fa-clock me-1"></i>
+                            <span data-en="Verified on:" data-hi="सत्यापित किया गया:">Verified on:</span>
+                            {{ verification_session.updated_at.strftime('%B %d, %Y at %I:%M %p') }}
+                        </small>
+                    </div>
+
+                {% else %}
+                    <!-- No verification session found -->
+                    <div class="text-center">
+                        <div class="result-icon error">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h2 class="result-title text-warning">
+                            <span data-en="No Verification Found" data-hi="कोई सत्यापन नहीं मिला">
+                                No Verification Found
+                            </span>
+                        </h2>
+                        <p class="lead text-muted">
+                            <span data-en="Please start a new verification process" data-hi="कृपया एक नई सत्यापन प्रक्रिया शुरू करें">
+                                Please start a new verification process
+                            </span>
+                        </p>
+                    </div>
+                {% endif %}
+
+                <!-- Action Buttons -->
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-5">
+                    {% if verification_session and verification_session.verification_status != 'verified' %}
+                        <a href="{{ url_for('restart') }}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-redo me-2"></i>
+                            <span data-en="Try Again" data-hi="पुनः प्रयास करें">Try Again</span>
+                        </a>
+                    {% endif %}
+                    
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-home me-2"></i>
+                        <span data-en="New Verification" data-hi="नया सत्यापन">New Verification</span>
+                    </a>
+                    
+                    <button type="button" class="btn btn-success btn-lg" onclick="window.print()">
+                        <i class="fas fa-print me-2"></i>
+                        <span data-en="Print Results" data-hi="परिणाम प्रिंट करें">Print Results</span>
+                    </button>
+                </div>
+
+                <!-- Support Section -->
+                <div class="mt-5">
+                    <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h6>
+                                <i class="fas fa-headset me-2"></i>
+                                <span data-en="Need Help?" data-hi="सहायता चाहिए?">Need Help?</span>
+                            </h6>
+                            <p class="mb-3">
+                                <span data-en="If you have questions about your verification results, our support team is here to help." 
+                                      data-hi="यदि आपके सत्यापन परिणामों के बारे में प्रश्न हैं, तो हमारी सहायता टीम मदद के लिए यहाँ है।">
+                                    If you have questions about your verification results, our support team is here to help.
+                                </span>
+                            </p>
+                            <div class="d-flex justify-content-center gap-3">
+                                <a href="{{ url_for('help') }}" class="btn btn-outline-primary">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    <span data-en="FAQ" data-hi="अक्सर पूछे जाने वाले प्रश्न">FAQ</span>
+                                </a>
+                                <a href="#" class="btn btn-outline-success">
+                                    <i class="fas fa-comments me-2"></i>
+                                    <span data-en="Live Chat" data-hi="लाइव चैट">Live Chat</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.result-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    animation: pulse 2s infinite;
+}
+
+.result-icon.success {
+    color: var(--success-color);
+}
+
+.result-icon.error {
+    color: var(--error-color);
+}
+
+.result-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.confidence-score {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.confidence-bar {
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.confidence-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #dc3545 0%, #ffc107 50%, #28a745 100%);
+    transition: width 2s ease-in-out;
+    border-radius: 4px;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.bounce-in {
+    animation: bounceIn 1s ease-out;
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.05); }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@media print {
+    .btn, .card-header, .alert {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    .btn {
+        display: none !important;
+    }
+    
+    .result-icon {
+        animation: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .result-title {
+        font-size: 2rem;
+    }
+    
+    .result-icon {
+        font-size: 4rem;
+    }
+    
+    .confidence-score {
+        font-size: 1.2rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Animate confidence bars
+    const confidenceFills = document.querySelectorAll('.confidence-fill');
+    confidenceFills.forEach(fill => {
+        const width = fill.style.width;
+        fill.style.width = '0%';
+        setTimeout(() => {
+            fill.style.width = width;
+        }, 500);
+    });
+    
+    // Add success/error sound effects (optional)
+    const resultIcon = document.querySelector('.result-icon');
+    if (resultIcon) {
+        if (resultIcon.classList.contains('success')) {
+            // Success sound (optional - would need Web Audio API)
+            console.log('Verification successful!');
+        } else if (resultIcon.classList.contains('error')) {
+            // Error sound (optional)
+            console.log('Verification failed!');
+        }
+    }
+    
+    // Auto-scroll to results on mobile
+    if (window.innerWidth <= 768) {
+        setTimeout(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }, 1000);
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,350 @@
+{% extends "base.html" %}
+
+{% block title %}DigiBharat - Welcome{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <!-- Hero Section -->
+    <div class="hero-section py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="DigiBharat Logo" class="mb-4" style="max-width: 200px;">
+                
+                <h1 class="display-4 fw-bold mb-3 fade-in">
+                    <span data-en="Welcome to DigiBharat" data-hi="डिजीभारत में आपका स्वागत है">
+                        Welcome to DigiBharat
+                    </span>
+                </h1>
+                
+                <p class="lead mb-4 fade-in">
+                    <span data-en="Secure, Fast, and User-Friendly Age & Identity Verification" 
+                          data-hi="सुरक्षित, तेज़, और उपयोगकर्ता-मित्र आयु और पहचान सत्यापन">
+                        Secure, Fast, and User-Friendly Age & Identity Verification
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row mb-5">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 text-center feature-card bounce-in">
+                <div class="card-body">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-shield-alt fa-3x text-primary"></i>
+                    </div>
+                    <h5 class="card-title">
+                        <span data-en="Secure Verification" data-hi="सुरक्षित सत्यापन">Secure Verification</span>
+                    </h5>
+                    <p class="card-text">
+                        <span data-en="Advanced face matching and OCR technology for accurate results" 
+                              data-hi="सटीक परिणामों के लिए उन्नत चेहरा मिलान और OCR तकनीक">
+                            Advanced face matching and OCR technology for accurate results
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 text-center feature-card bounce-in">
+                <div class="card-body">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-clock fa-3x text-success"></i>
+                    </div>
+                    <h5 class="card-title">
+                        <span data-en="Quick Process" data-hi="त्वरित प्रक्रिया">Quick Process</span>
+                    </h5>
+                    <p class="card-text">
+                        <span data-en="Complete verification in just 3 simple steps within minutes" 
+                              data-hi="केवल 3 सरल चरणों में मिनटों में पूरा सत्यापन">
+                            Complete verification in just 3 simple steps within minutes
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 text-center feature-card bounce-in">
+                <div class="card-body">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-mobile-alt fa-3x text-info"></i>
+                    </div>
+                    <h5 class="card-title">
+                        <span data-en="Mobile Friendly" data-hi="मोबाइल अनुकूल">Mobile Friendly</span>
+                    </h5>
+                    <p class="card-text">
+                        <span data-en="Optimized for mobile devices with camera integration" 
+                              data-hi="कैमरा एकीकरण के साथ मोबाइल उपकरणों के लिए अनुकूलित">
+                            Optimized for mobile devices with camera integration
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Process Overview -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-10">
+            <div class="card process-overview">
+                <div class="card-header">
+                    <h3 class="card-title mb-0">
+                        <i class="fas fa-list-ol me-2"></i>
+                        <span data-en="Simple 3-Step Process" data-hi="सरल 3-चरणीय प्रक्रिया">
+                            Simple 3-Step Process
+                        </span>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center mb-4">
+                            <div class="process-step">
+                                <div class="step-number">1</div>
+                                <i class="fas fa-upload fa-2x text-primary mb-3"></i>
+                                <h5>
+                                    <span data-en="Upload ID" data-hi="आईडी अपलोड करें">Upload ID</span>
+                                </h5>
+                                <p class="text-muted">
+                                    <span data-en="Upload your Aadhaar card or government ID" 
+                                          data-hi="अपना आधार कार्ड या सरकारी आईडी अपलोड करें">
+                                        Upload your Aadhaar card or government ID
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 text-center mb-4">
+                            <div class="process-step">
+                                <div class="step-number">2</div>
+                                <i class="fas fa-camera fa-2x text-success mb-3"></i>
+                                <h5>
+                                    <span data-en="Take Selfie" data-hi="सेल्फी लें">Take Selfie</span>
+                                </h5>
+                                <p class="text-muted">
+                                    <span data-en="Capture a clear selfie for face verification" 
+                                          data-hi="चेहरा सत्यापन के लिए एक स्पष्ट सेल्फी लें">
+                                        Capture a clear selfie for face verification
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 text-center mb-4">
+                            <div class="process-step">
+                                <div class="step-number">3</div>
+                                <i class="fas fa-check-circle fa-2x text-info mb-3"></i>
+                                <h5>
+                                    <span data-en="Get Results" data-hi="परिणाम प्राप्त करें">Get Results</span>
+                                </h5>
+                                <p class="text-muted">
+                                    <span data-en="Receive instant verification results with confidence score" 
+                                          data-hi="विश्वास स्कोर के साथ तुरंत सत्यापन परिणाम प्राप्त करें">
+                                        Receive instant verification results with confidence score
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card cta-card">
+                <div class="card-body text-center py-5">
+                    <h4 class="mb-4">
+                        <span data-en="Ready to get verified?" data-hi="सत्यापन के लिए तैयार हैं?">
+                            Ready to get verified?
+                        </span>
+                    </h4>
+                    
+                    <p class="mb-4 text-muted">
+                        <span data-en="Start your secure verification process now. It only takes a few minutes!" 
+                              data-hi="अभी अपनी सुरक्षित सत्यापन प्रक्रिया शुरू करें। इसमें केवल कुछ मिनट लगते हैं!">
+                            Start your secure verification process now. It only takes a few minutes!
+                        </span>
+                    </p>
+                    
+                    <div class="d-grid gap-3">
+                        <a href="{{ url_for('upload') }}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-play me-2"></i>
+                            <span data-en="Start Verification" data-hi="सत्यापन शुरू करें">Start Verification</span>
+                        </a>
+                        
+                        <a href="{{ url_for('help') }}" class="btn btn-outline-primary">
+                            <i class="fas fa-question-circle me-2"></i>
+                            <span data-en="Need Help?" data-hi="सहायता चाहिए?">Need Help?</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trust Indicators -->
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-8">
+            <div class="trust-indicators text-center">
+                <h6 class="text-muted mb-3">
+                    <span data-en="Trusted by thousands of users" data-hi="हजारों उपयोगकर्ताओं द्वारा भरोसेमंद">
+                        Trusted by thousands of users
+                    </span>
+                </h6>
+                <div class="d-flex justify-content-center align-items-center gap-4">
+                    <div class="trust-item">
+                        <i class="fas fa-lock text-success"></i>
+                        <small class="ms-2">
+                            <span data-en="SSL Encrypted" data-hi="SSL एन्क्रिप्टेड">SSL Encrypted</span>
+                        </small>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-user-shield text-primary"></i>
+                        <small class="ms-2">
+                            <span data-en="Privacy Protected" data-hi="गोपनीयता सुरक्षित">Privacy Protected</span>
+                        </small>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-award text-warning"></i>
+                        <small class="ms-2">
+                            <span data-en="ISO Certified" data-hi="ISO प्रमाणित">ISO Certified</span>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.hero-section {
+    background: linear-gradient(135deg, rgba(255,107,53,0.1), rgba(19,136,8,0.1));
+    border-radius: 20px;
+    margin-bottom: 3rem;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.feature-icon {
+    padding: 1rem;
+    background: rgba(255,107,53,0.1);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.process-overview {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+}
+
+.process-step {
+    position: relative;
+    padding: 2rem 1rem;
+}
+
+.step-number {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(45deg, #FF6B35, #138808);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.cta-card {
+    background: linear-gradient(135deg, #FF6B35, #138808);
+    color: white;
+    transform: perspective(1000px) rotateX(5deg);
+}
+
+.cta-card .card-body {
+    background: rgba(255,255,255,0.95);
+    border-radius: 15px;
+    color: #333;
+}
+
+.trust-indicators {
+    opacity: 0.8;
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background: rgba(255,255,255,0.8);
+    border-radius: 20px;
+    border: 1px solid #e9ecef;
+}
+
+@media (max-width: 768px) {
+    .trust-indicators .d-flex {
+        flex-direction: column;
+        gap: 1rem !important;
+    }
+    
+    .step-number {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        margin-bottom: 1rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Animate elements on load
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const bounceElements = document.querySelectorAll('.bounce-in');
+    
+    setTimeout(() => {
+        fadeElements.forEach((el, index) => {
+            setTimeout(() => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, index * 200);
+        });
+    }, 100);
+    
+    setTimeout(() => {
+        bounceElements.forEach((el, index) => {
+            setTimeout(() => {
+                el.style.opacity = '1';
+                el.style.transform = 'scale(1)';
+            }, index * 300);
+        });
+    }, 500);
+    
+    // Set initial styles
+    fadeElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'all 0.6s ease-out';
+    });
+    
+    bounceElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'scale(0.8)';
+        el.style.transition = 'all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,438 @@
+{% extends "base.html" %}
+
+{% set show_progress = true %}
+{% set current_step = 2 %}
+{% set show_camera = true %}
+
+{% block title %}Take Selfie - DigiBharat{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-camera me-2"></i>
+                    <span data-en="Step 2: Take Selfie" data-hi="चरण 2: सेल्फी लें">
+                        Step 2: Take Selfie
+                    </span>
+                </h3>
+            </div>
+            <div class="card-body">
+                <!-- Extracted Information Display -->
+                {% if verification_session and verification_session.extracted_name %}
+                <div class="alert alert-success mb-4">
+                    <h6>
+                        <i class="fas fa-check-circle me-2"></i>
+                        <span data-en="Document Information Extracted" data-hi="दस्तावेज़ की जानकारी निकाली गई">
+                            Document Information Extracted
+                        </span>
+                    </h6>
+                    <div class="row">
+                        {% if verification_session.extracted_name %}
+                        <div class="col-md-4">
+                            <strong>
+                                <span data-en="Name:" data-hi="नाम:">Name:</span>
+                            </strong><br>
+                            {{ verification_session.extracted_name }}
+                        </div>
+                        {% endif %}
+                        {% if verification_session.extracted_dob %}
+                        <div class="col-md-4">
+                            <strong>
+                                <span data-en="Date of Birth:" data-hi="जन्म तिथि:">Date of Birth:</span>
+                            </strong><br>
+                            {{ verification_session.extracted_dob }}
+                        </div>
+                        {% endif %}
+                        {% if verification_session.extracted_age %}
+                        <div class="col-md-4">
+                            <strong>
+                                <span data-en="Age:" data-hi="आयु:">Age:</span>
+                            </strong><br>
+                            {{ verification_session.extracted_age }} years
+                            {% if verification_session.extracted_age >= 18 %}
+                                <i class="fas fa-check-circle text-success ms-2" title="Adult"></i>
+                            {% else %}
+                                <i class="fas fa-exclamation-circle text-warning ms-2" title="Minor"></i>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Instructions -->
+                <div class="alert alert-info mb-4">
+                    <h6>
+                        <i class="fas fa-info-circle me-2"></i>
+                        <span data-en="Selfie Guidelines" data-hi="सेल्फी दिशानिर्देश">Selfie Guidelines</span>
+                    </h6>
+                    <ul class="mb-0">
+                        <li data-en="Look directly at the camera" data-hi="सीधे कैमरे की तरफ देखें">
+                            Look directly at the camera
+                        </li>
+                        <li data-en="Ensure good lighting on your face" data-hi="अपने चेहरे पर अच्छी रोशनी सुनिश्चित करें">
+                            Ensure good lighting on your face
+                        </li>
+                        <li data-en="Keep your face within the guide frame" data-hi="अपना चेहरा गाइड फ्रेम के अंदर रखें">
+                            Keep your face within the guide frame
+                        </li>
+                        <li data-en="Remove sunglasses or head coverings if possible" data-hi="यदि संभव हो तो धूप का चश्मा या सिर ढकने वाली चीजें हटा दें">
+                            Remove sunglasses or head coverings if possible
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Camera Section -->
+                <div class="camera-section mb-4">
+                    <!-- Start Camera Button -->
+                    <div class="text-center mb-3" id="camera-start-section">
+                        <button type="button" class="btn btn-primary btn-lg" id="start-camera">
+                            <i class="fas fa-camera me-2"></i>
+                            <span data-en="Start Camera" data-hi="कैमरा चालू करें">Start Camera</span>
+                        </button>
+                        <p class="text-muted mt-2">
+                            <span data-en="Allow camera access when prompted" data-hi="संकेत मिलने पर कैमरा एक्सेस की अनुमति दें">
+                                Allow camera access when prompted
+                            </span>
+                        </p>
+                    </div>
+
+                    <!-- Camera Container -->
+                    <div class="camera-container" id="camera-container" style="display: none;">
+                        <video id="camera" autoplay muted playsinline></video>
+                        <div class="camera-overlay"></div>
+                        <button type="button" class="capture-btn" id="capture-btn">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+
+                    <!-- Hidden Canvas for Capture -->
+                    <canvas id="camera-canvas" style="display: none;"></canvas>
+
+                    <!-- Camera Controls -->
+                    <div id="camera-controls" class="text-center mt-3" style="display: none;">
+                        <button type="button" class="btn btn-outline-primary me-2" id="switch-camera">
+                            <i class="fas fa-sync-alt me-2"></i>
+                            <span data-en="Switch Camera" data-hi="कैमरा बदलें">Switch Camera</span>
+                        </button>
+                    </div>
+
+                    <!-- Photo Preview -->
+                    <div id="photo-preview" class="text-center mt-4" style="display: none;">
+                        <!-- Captured photo will be displayed here -->
+                    </div>
+
+                    <!-- Quality Feedback -->
+                    <div id="quality-feedback" class="mt-3">
+                        <!-- Quality feedback will be displayed here -->
+                    </div>
+
+                    <!-- Confirmation Buttons -->
+                    <div id="confirmation-buttons" class="mt-4" style="display: none;">
+                        <!-- Confirmation buttons will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- File Upload Fallback -->
+                <div id="file-upload-fallback" style="display: none;">
+                    <!-- Fallback upload option will be shown here if camera fails -->
+                </div>
+
+                <!-- Upload Form -->
+                <form method="POST" enctype="multipart/form-data" id="selfie-form">
+                    <!-- Manual Upload Option -->
+                    <div class="upload-alternative mb-4">
+                        <h6>
+                            <i class="fas fa-upload me-2"></i>
+                            <span data-en="Or Upload from Gallery" data-hi="या गैलरी से अपलोड करें">
+                                Or Upload from Gallery
+                            </span>
+                        </h6>
+                        <div class="upload-area" style="padding: 2rem;">
+                            <input type="file" name="selfie" id="selfie-input" accept="image/*" style="display: none;">
+                            <div class="text-center">
+                                <i class="fas fa-images fa-2x text-primary mb-2"></i>
+                                <p class="mb-1">
+                                    <span data-en="Choose selfie from your device" data-hi="अपने डिवाइस से सेल्फी चुनें">
+                                        Choose selfie from your device
+                                    </span>
+                                </p>
+                                <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('selfie-input').click()">
+                                    <i class="fas fa-folder-open me-2"></i>
+                                    <span data-en="Browse Files" data-hi="फ़ाइलें ब्राउज़ करें">Browse Files</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Guidelines -->
+                    <div id="camera-guidelines" class="mb-4">
+                        <!-- Camera guidelines will be inserted here -->
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+                        <a href="{{ url_for('upload') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>
+                            <span data-en="Back to Upload" data-hi="अपलोड पर वापस">Back to Upload</span>
+                        </a>
+                        
+                        <button type="submit" class="btn btn-primary" id="continue-btn" disabled>
+                            <i class="fas fa-arrow-right me-2"></i>
+                            <span data-en="Continue to Results" data-hi="परिणाम के लिए आगे बढ़ें">Continue to Results</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Tips Section -->
+                <div class="mt-5">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h6>
+                                <i class="fas fa-lightbulb me-2 text-warning"></i>
+                                <span data-en="Pro Tips for Best Results" data-hi="सर्वोत्तम परिणामों के लिए प्रो टिप्स">
+                                    Pro Tips for Best Results
+                                </span>
+                            </h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2">
+                                            <i class="fas fa-sun text-warning me-2"></i>
+                                            <span data-en="Use natural lighting" data-hi="प्राकृतिक प्रकाश का उपयोग करें">
+                                                Use natural lighting
+                                            </span>
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-eye text-info me-2"></i>
+                                            <span data-en="Look directly at camera" data-hi="सीधे कैमरे की तरफ देखें">
+                                                Look directly at camera
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2">
+                                            <i class="fas fa-smile text-success me-2"></i>
+                                            <span data-en="Maintain neutral expression" data-hi="तटस्थ अभिव्यक्ति बनाए रखें">
+                                                Maintain neutral expression
+                                            </span>
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-mobile-alt text-primary me-2"></i>
+                                            <span data-en="Hold device steady" data-hi="डिवाइस को स्थिर रखें">
+                                                Hold device steady
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.camera-container {
+    position: relative;
+    background: #000;
+    border-radius: 15px;
+    overflow: hidden;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#camera {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.camera-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 250px;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+}
+
+.camera-overlay::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    content: attr(data-en);
+}
+
+.capture-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: white;
+    border: 4px solid white;
+    font-size: 1.5rem;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.capture-btn:hover {
+    background: var(--secondary-color);
+    transform: translateX(-50%) scale(1.1);
+}
+
+.captured-photo img {
+    max-width: 300px;
+    max-height: 400px;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+}
+
+.upload-alternative .upload-area {
+    border: 2px dashed #ddd;
+    border-radius: 10px;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.upload-alternative .upload-area:hover {
+    border-color: var(--primary-color);
+    background: rgba(255, 107, 53, 0.05);
+}
+
+@media (max-width: 768px) {
+    .camera-overlay {
+        width: 150px;
+        height: 200px;
+    }
+    
+    .capture-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 1.2rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const selfieInput = document.getElementById('selfie-input');
+    const continueBtn = document.getElementById('continue-btn');
+    const selfieForm = document.getElementById('selfie-form');
+    
+    // File input change handler
+    selfieInput.addEventListener('change', function(e) {
+        if (e.target.files.length > 0) {
+            continueBtn.disabled = false;
+            validateAndPreviewFile(e.target.files[0]);
+        } else {
+            continueBtn.disabled = true;
+        }
+    });
+    
+    // Form submission handler
+    selfieForm.addEventListener('submit', function(e) {
+        if (!selfieInput.files.length) {
+            e.preventDefault();
+            showAlert('कृपया एक सेल्फी लें या अपलोड करें / Please take or upload a selfie', 'error');
+            return;
+        }
+        
+        // Show processing message
+        continueBtn.disabled = true;
+        continueBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i><span data-en="Processing..." data-hi="प्रसंस्करण...">Processing...</span>';
+    });
+    
+    function validateAndPreviewFile(file) {
+        const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+        const maxSize = 16 * 1024 * 1024; // 16MB
+        
+        if (!allowedTypes.includes(file.type)) {
+            showAlert('अमान्य फ़ाइल प्रकार / Invalid file type', 'error');
+            selfieInput.value = '';
+            continueBtn.disabled = true;
+            return false;
+        }
+        
+        if (file.size > maxSize) {
+            showAlert('फ़ाइल का आकार बहुत बड़ा है / File size too large', 'error');
+            selfieInput.value = '';
+            continueBtn.disabled = true;
+            return false;
+        }
+        
+        // Show preview
+        showFilePreview(file);
+        return true;
+    }
+    
+    function showFilePreview(file) {
+        const previewContainer = document.getElementById('photo-preview');
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            previewContainer.innerHTML = `
+                <div class="captured-photo">
+                    <img src="${e.target.result}" alt="Uploaded selfie" class="img-fluid rounded">
+                    <p class="mt-2 text-muted">
+                        <strong>${file.name}</strong><br>
+                        <span data-en="File uploaded successfully" data-hi="फ़ाइल सफलतापूर्वक अपलोड की गई">
+                            File uploaded successfully
+                        </span>
+                    </p>
+                </div>
+            `;
+            previewContainer.style.display = 'block';
+        };
+        
+        reader.readAsDataURL(file);
+    }
+    
+    function showAlert(message, type) {
+        const alertDiv = document.createElement('div');
+        alertDiv.className = `alert alert-${type === 'error' ? 'danger' : type} alert-dismissible fade show`;
+        alertDiv.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        
+        const container = document.querySelector('.container');
+        container.insertBefore(alertDiv, container.firstChild);
+        
+        setTimeout(() => {
+            if (alertDiv.parentNode) {
+                alertDiv.remove();
+            }
+        }, 5000);
+    }
+    
+    // Enable continue button if camera capture was successful
+    window.addEventListener('selfie-captured', function() {
+        continueBtn.disabled = false;
+    });
+});
+</script>
+{% endblock %}

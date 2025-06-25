@@ -1,0 +1,550 @@
+{% extends "base.html" %}
+
+{% block title %}Help & Support - DigiBharat{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-3 mb-4">
+        <!-- Help Navigation -->
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-compass me-2"></i>
+                    <span data-en="Quick Navigation" data-hi="त्वरित नेविगेशन">Quick Navigation</span>
+                </h6>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="#getting-started" class="list-group-item list-group-item-action">
+                    <i class="fas fa-play-circle me-2"></i>
+                    <span data-en="Getting Started" data-hi="शुरुआत करना">Getting Started</span>
+                </a>
+                <a href="#upload-help" class="list-group-item list-group-item-action">
+                    <i class="fas fa-upload me-2"></i>
+                    <span data-en="Upload Help" data-hi="अपलोड सहायता">Upload Help</span>
+                </a>
+                <a href="#selfie-help" class="list-group-item list-group-item-action">
+                    <i class="fas fa-camera me-2"></i>
+                    <span data-en="Selfie Guide" data-hi="सेल्फी गाइड">Selfie Guide</span>
+                </a>
+                <a href="#troubleshooting" class="list-group-item list-group-item-action">
+                    <i class="fas fa-tools me-2"></i>
+                    <span data-en="Troubleshooting" data-hi="समस्या निवारण">Troubleshooting</span>
+                </a>
+                <a href="#privacy" class="list-group-item list-group-item-action">
+                    <i class="fas fa-shield-alt me-2"></i>
+                    <span data-en="Privacy & Security" data-hi="गोपनीयता और सुरक्षा">Privacy & Security</span>
+                </a>
+                <a href="#contact" class="list-group-item list-group-item-action">
+                    <i class="fas fa-envelope me-2"></i>
+                    <span data-en="Contact Support" data-hi="सहायता संपर्क">Contact Support</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-9">
+        <!-- Getting Started -->
+        <section id="getting-started" class="mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <i class="fas fa-play-circle me-2 text-primary"></i>
+                        <span data-en="Getting Started with DigiBharat" data-hi="DigiBharat के साथ शुरुआत">
+                            Getting Started with DigiBharat
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <p data-en="DigiBharat is a secure identity verification system that helps verify your age and identity in just 3 simple steps." 
+                       data-hi="DigiBharat एक सुरक्षित पहचान सत्यापन प्रणाली है जो केवल 3 सरल चरणों में आपकी आयु और पहचान सत्यापित करने में मदद करती है।">
+                        DigiBharat is a secure identity verification system that helps verify your age and identity in just 3 simple steps.
+                    </p>
+                    
+                    <div class="row">
+                        <div class="col-md-4 text-center mb-3">
+                            <div class="p-3">
+                                <i class="fas fa-upload fa-3x text-primary mb-3"></i>
+                                <h6 data-en="Step 1: Upload ID" data-hi="चरण 1: आईडी अपलोड करें">Step 1: Upload ID</h6>
+                                <p class="small text-muted" data-en="Upload your Aadhaar card or government ID" 
+                                   data-hi="अपना आधार कार्ड या सरकारी आईडी अपलोड करें">
+                                    Upload your Aadhaar card or government ID
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center mb-3">
+                            <div class="p-3">
+                                <i class="fas fa-camera fa-3x text-success mb-3"></i>
+                                <h6 data-en="Step 2: Take Selfie" data-hi="चरण 2: सेल्फी लें">Step 2: Take Selfie</h6>
+                                <p class="small text-muted" data-en="Capture a clear selfie for face matching" 
+                                   data-hi="चेहरा मिलान के लिए एक स्पष्ट सेल्फी लें">
+                                    Capture a clear selfie for face matching
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center mb-3">
+                            <div class="p-3">
+                                <i class="fas fa-check-circle fa-3x text-info mb-3"></i>
+                                <h6 data-en="Step 3: Get Results" data-hi="चरण 3: परिणाम प्राप्त करें">Step 3: Get Results</h6>
+                                <p class="small text-muted" data-en="View instant verification results" 
+                                   data-hi="तुरंत सत्यापन परिणाम देखें">
+                                    View instant verification results
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upload Help -->
+        <section id="upload-help" class="mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <i class="fas fa-upload me-2 text-success"></i>
+                        <span data-en="ID Document Upload Guide" data-hi="आईडी दस्तावेज़ अपलोड गाइड">
+                            ID Document Upload Guide
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-success">
+                                <i class="fas fa-check me-2"></i>
+                                <span data-en="Do's" data-hi="करने योग्य">Do's</span>
+                            </h6>
+                            <ul>
+                                <li data-en="Use clear, high-resolution images" data-hi="स्पष्ट, उच्च-रिज़ॉल्यूशन छवियों का उपयोग करें">
+                                    Use clear, high-resolution images
+                                </li>
+                                <li data-en="Ensure good lighting" data-hi="अच्छी रोशनी सुनिश्चित करें">
+                                    Ensure good lighting
+                                </li>
+                                <li data-en="Keep document flat and straight" data-hi="दस्तावेज़ को समतल और सीधा रखें">
+                                    Keep document flat and straight
+                                </li>
+                                <li data-en="Include all corners of the document" data-hi="दस्तावेज़ के सभी कोनों को शामिल करें">
+                                    Include all corners of the document
+                                </li>
+                                <li data-en="Use supported formats (JPG, PNG, PDF)" data-hi="समर्थित प्रारूपों का उपयोग करें (JPG, PNG, PDF)">
+                                    Use supported formats (JPG, PNG, PDF)
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-danger">
+                                <i class="fas fa-times me-2"></i>
+                                <span data-en="Don'ts" data-hi="न करने योग्य">Don'ts</span>
+                            </h6>
+                            <ul>
+                                <li data-en="Don't use blurry or out-of-focus images" data-hi="धुंधली या फोकस से बाहर की छवियों का उपयोग न करें">
+                                    Don't use blurry or out-of-focus images
+                                </li>
+                                <li data-en="Avoid shadows or glare" data-hi="छाया या चकाचौंध से बचें">
+                                    Avoid shadows or glare
+                                </li>
+                                <li data-en="Don't crop important information" data-hi="महत्वपूर्ण जानकारी को क्रॉप न करें">
+                                    Don't crop important information
+                                </li>
+                                <li data-en="Don't use damaged documents" data-hi="क्षतिग्रस्त दस्तावेज़ों का उपयोग न करें">
+                                    Don't use damaged documents
+                                </li>
+                                <li data-en="Don't exceed 16MB file size" data-hi="16MB फ़ाइल आकार से अधिक न करें">
+                                    Don't exceed 16MB file size
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info mt-4">
+                        <h6>
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <span data-en="Pro Tip" data-hi="प्रो टिप">Pro Tip</span>
+                        </h6>
+                        <p class="mb-0" data-en="For best results, take the photo during daytime near a window for natural lighting, or use a well-lit room with white background." 
+                           data-hi="सर्वोत्तम परिणामों के लिए, प्राकृतिक प्रकाश के लिए दिन के समय खिड़की के पास फोटो लें, या सफेद पृष्ठभूमि के साथ अच्छी तरह से प्रकाशित कमरे का उपयोग करें।">
+                            For best results, take the photo during daytime near a window for natural lighting, or use a well-lit room with white background.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Selfie Help -->
+        <section id="selfie-help" class="mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <i class="fas fa-camera me-2 text-warning"></i>
+                        <span data-en="Perfect Selfie Guide" data-hi="परफेक्ट सेल्फी गाइड">
+                            Perfect Selfie Guide
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h6 data-en="Camera Setup" data-hi="कैमरा सेटअप">Camera Setup</h6>
+                            <ul>
+                                <li data-en="Allow camera access when prompted" data-hi="संकेत मिलने पर कैमरा एक्सेस की अनुमति दें">
+                                    Allow camera access when prompted
+                                </li>
+                                <li data-en="Position yourself in good lighting" data-hi="अपने आप को अच्छी रोशनी में रखें">
+                                    Position yourself in good lighting
+                                </li>
+                                <li data-en="Keep your face within the guide frame" data-hi="अपना चेहरा गाइड फ्रेम के अंदर रखें">
+                                    Keep your face within the guide frame
+                                </li>
+                                <li data-en="Look directly at the camera" data-hi="सीधे कैमरे की तरफ देखें">
+                                    Look directly at the camera
+                                </li>
+                            </ul>
+
+                            <h6 data-en="Best Practices" data-hi="सर्वोत्तम प्रथाएं">Best Practices</h6>
+                            <ul>
+                                <li data-en="Remove sunglasses and hats" data-hi="धूप का चश्मा और टोपी हटा दें">
+                                    Remove sunglasses and hats
+                                </li>
+                                <li data-en="Keep a neutral facial expression" data-hi="तटस्थ चेहरे की अभिव्यक्ति रखें">
+                                    Keep a neutral facial expression
+                                </li>
+                                <li data-en="Ensure your entire face is visible" data-hi="सुनिश्चित करें कि आपका पूरा चेहरा दिखाई दे रहा है">
+                                    Ensure your entire face is visible
+                                </li>
+                                <li data-en="Hold the device steady" data-hi="डिवाइस को स्थिर रखें">
+                                    Hold the device steady
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div class="selfie-demo p-4 bg-light rounded">
+                                    <i class="fas fa-user-circle fa-5x text-muted mb-3"></i>
+                                    <p class="small text-muted" data-en="Position your face like this for best results" 
+                                       data-hi="सर्वोत्तम परिणामों के लिए अपना चेहरा इस तरह रखें">
+                                        Position your face like this for best results
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Troubleshooting -->
+        <section id="troubleshooting" class="mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <i class="fas fa-tools me-2 text-danger"></i>
+                        <span data-en="Common Issues & Solutions" data-hi="सामान्य समस्याएं और समाधान">
+                            Common Issues & Solutions
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="troubleshootingAccordion">
+                        <!-- Camera Issues -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingCamera">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCamera">
+                                    <i class="fas fa-camera me-2"></i>
+                                    <span data-en="Camera not working" data-hi="कैमरा काम नहीं कर रहा">Camera not working</span>
+                                </button>
+                            </h2>
+                            <div id="collapseCamera" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+                                <div class="accordion-body">
+                                    <ul>
+                                        <li data-en="Check if camera permissions are enabled in your browser" 
+                                            data-hi="जांचें कि क्या आपके ब्राउज़र में कैमरा अनुमतियां सक्षम हैं">
+                                            Check if camera permissions are enabled in your browser
+                                        </li>
+                                        <li data-en="Try refreshing the page and allowing camera access" 
+                                            data-hi="पेज को रिफ्रेश करने की कोशिश करें और कैमरा एक्सेस की अनुमति दें">
+                                            Try refreshing the page and allowing camera access
+                                        </li>
+                                        <li data-en="Make sure no other application is using the camera" 
+                                            data-hi="सुनिश्चित करें कि कोई अन्य एप्लिकेशन कैमरा का उपयोग नहीं कर रहा है">
+                                            Make sure no other application is using the camera
+                                        </li>
+                                        <li data-en="Use the file upload option as an alternative" 
+                                            data-hi="वैकल्पिक के रूप में फ़ाइल अपलोड विकल्प का उपयोग करें">
+                                            Use the file upload option as an alternative
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Upload Issues -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingUpload">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseUpload">
+                                    <i class="fas fa-upload me-2"></i>
+                                    <span data-en="File upload problems" data-hi="फ़ाइल अपलोड समस्याएं">File upload problems</span>
+                                </button>
+                            </h2>
+                            <div id="collapseUpload" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+                                <div class="accordion-body">
+                                    <ul>
+                                        <li data-en="Check file size (maximum 16MB allowed)" 
+                                            data-hi="फ़ाइल का आकार जांचें (अधिकतम 16MB की अनुमति है)">
+                                            Check file size (maximum 16MB allowed)
+                                        </li>
+                                        <li data-en="Ensure file format is supported (JPG, PNG, PDF)" 
+                                            data-hi="सुनिश्चित करें कि फ़ाइल प्रारूप समर्थित है (JPG, PNG, PDF)">
+                                            Ensure file format is supported (JPG, PNG, PDF)
+                                        </li>
+                                        <li data-en="Check your internet connection" 
+                                            data-hi="अपना इंटरनेट कनेक्शन जांचें">
+                                            Check your internet connection
+                                        </li>
+                                        <li data-en="Try using a different browser or device" 
+                                            data-hi="किसी अन्य ब्राउज़र या डिवाइस का उपयोग करने की कोशिश करें">
+                                            Try using a different browser or device
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Verification Failed -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingVerification">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseVerification">
+                                    <i class="fas fa-times-circle me-2"></i>
+                                    <span data-en="Verification failed" data-hi="सत्यापन असफल">Verification failed</span>
+                                </button>
+                            </h2>
+                            <div id="collapseVerification" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+                                <div class="accordion-body">
+                                    <ul>
+                                        <li data-en="Ensure your selfie clearly shows your face" 
+                                            data-hi="सुनिश्चित करें कि आपकी सेल्फी में आपका चेहरा स्पष्ट रूप से दिखाई दे रहा है">
+                                            Ensure your selfie clearly shows your face
+                                        </li>
+                                        <li data-en="Make sure the ID document is clear and readable" 
+                                            data-hi="सुनिश्चित करें कि आईडी दस्तावेज़ स्पष्ट और पढ़ने योग्य है">
+                                            Make sure the ID document is clear and readable
+                                        </li>
+                                        <li data-en="Check that you're using the same person's ID and selfie" 
+                                            data-hi="जांचें कि आप एक ही व्यक्ति की आईडी और सेल्फी का उपयोग कर रहे हैं">
+                                            Check that you're using the same person's ID and selfie
+                                        </li>
+                                        <li data-en="Try retaking the selfie in better lighting" 
+                                            data-hi="बेहतर रोशनी में सेल्फी दोबारा लेने की कोशिश करें">
+                                            Try retaking the selfie in better lighting
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Privacy & Security -->
+        <section id="privacy" class="mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <i class="fas fa-shield-alt me-2 text-info"></i>
+                        <span data-en="Privacy & Security" data-hi="गोपनीयता और सुरक्षा">
+                            Privacy & Security
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <h6 data-en="How we protect your data:" data-hi="हम आपके डेटा को कैसे सुरक्षित रखते हैं:">
+                        How we protect your data:
+                    </h6>
+                    <ul>
+                        <li data-en="All data is encrypted during transmission and storage" 
+                            data-hi="सभी डेटा ट्रांसमिशन और स्टोरेज के दौरान एन्क्रिप्टेड है">
+                            All data is encrypted during transmission and storage
+                        </li>
+                        <li data-en="We don't store your documents permanently" 
+                            data-hi="हम आपके दस्तावेज़ों को स्थायी रूप से संग्रहीत नहीं करते">
+                            We don't store your documents permanently
+                        </li>
+                        <li data-en="Personal information is processed locally when possible" 
+                            data-hi="व्यक्तिगत जानकारी को जब संभव हो स्थानीय रूप से प्रसंस्करित किया जाता है">
+                            Personal information is processed locally when possible
+                        </li>
+                        <li data-en="We comply with data protection regulations" 
+                            data-hi="हम डेटा सुरक्षा नियमों का पालन करते हैं">
+                            We comply with data protection regulations
+                        </li>
+                    </ul>
+
+                    <div class="alert alert-success">
+                        <h6>
+                            <i class="fas fa-lock me-2"></i>
+                            <span data-en="Your data is safe with us" data-hi="आपका डेटा हमारे साथ सुरक्षित है">
+                                Your data is safe with us
+                            </span>
+                        </h6>
+                        <p class="mb-0" data-en="DigiBharat uses industry-standard security measures to protect your personal information throughout the verification process." 
+                           data-hi="DigiBharat सत्यापन प्रक्रिया के दौरान आपकी व्यक्तिगत जानकारी की सुरक्षा के लिए उद्योग-मानक सुरक्षा उपायों का उपयोग करता है।">
+                            DigiBharat uses industry-standard security measures to protect your personal information throughout the verification process.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Support -->
+        <section id="contact" class="mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <i class="fas fa-envelope me-2 text-primary"></i>
+                        <span data-en="Contact Support" data-hi="सहायता संपर्क">
+                            Contact Support
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center mb-4">
+                            <div class="support-option p-4">
+                                <i class="fas fa-comments fa-3x text-primary mb-3"></i>
+                                <h6 data-en="Live Chat" data-hi="लाइव चैट">Live Chat</h6>
+                                <p class="text-muted" data-en="Get instant help from our support team" 
+                                   data-hi="हमारी सहायता टीम से तुरंत सहायता प्राप्त करें">
+                                    Get instant help from our support team
+                                </p>
+                                <button class="btn btn-outline-primary">
+                                    <span data-en="Start Chat" data-hi="चैट शुरू करें">Start Chat</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 text-center mb-4">
+                            <div class="support-option p-4">
+                                <i class="fas fa-envelope fa-3x text-success mb-3"></i>
+                                <h6 data-en="Email Support" data-hi="ईमेल सहायता">Email Support</h6>
+                                <p class="text-muted" data-en="Send us your questions via email" 
+                                   data-hi="हमें ईमेल के माध्यम से अपने प्रश्न भेजें">
+                                    Send us your questions via email
+                                </p>
+                                <a href="mailto:support@digibharat.com" class="btn btn-outline-success">
+                                    <span data-en="Send Email" data-hi="ईमेल भेजें">Send Email</span>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 text-center mb-4">
+                            <div class="support-option p-4">
+                                <i class="fas fa-phone fa-3x text-info mb-3"></i>
+                                <h6 data-en="Phone Support" data-hi="फोन सहायता">Phone Support</h6>
+                                <p class="text-muted" data-en="Call us for immediate assistance" 
+                                   data-hi="तत्काल सहायता के लिए हमें कॉल करें">
+                                    Call us for immediate assistance
+                                </p>
+                                <a href="tel:+911800123456" class="btn btn-outline-info">
+                                    <span data-en="Call Now" data-hi="अभी कॉल करें">Call Now</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <h6 data-en="Support Hours" data-hi="सहायता घंटे">Support Hours</h6>
+                        <p class="text-muted">
+                            <span data-en="Monday to Friday: 9:00 AM - 8:00 PM IST" data-hi="सोमवार से शुक्रवार: सुबह 9:00 - रात 8:00 IST">
+                                Monday to Friday: 9:00 AM - 8:00 PM IST
+                            </span><br>
+                            <span data-en="Saturday: 10:00 AM - 6:00 PM IST" data-hi="शनिवार: सुबह 10:00 - शाम 6:00 IST">
+                                Saturday: 10:00 AM - 6:00 PM IST
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<style>
+.support-option {
+    background: #f8f9fa;
+    border-radius: 10px;
+    transition: var(--transition);
+}
+
+.support-option:hover {
+    background: #e9ecef;
+    transform: translateY(-2px);
+}
+
+.selfie-demo {
+    border: 2px dashed #ddd;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+    color: var(--bs-primary);
+}
+
+.list-group-item-action:hover {
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+
+@media (max-width: 768px) {
+    .support-option {
+        margin-bottom: 2rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scrolling for navigation links
+    const navLinks = document.querySelectorAll('a[href^="#"]');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Update active nav item
+                navLinks.forEach(nl => nl.classList.remove('active'));
+                this.classList.add('active');
+            }
+        });
+    });
+    
+    // Highlight current section in navigation
+    const sections = document.querySelectorAll('section[id]');
+    const observerOptions = {
+        rootMargin: '-50px 0px -50px 0px',
+        threshold: 0.1
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                const navLink = document.querySelector(`a[href="#${id}"]`);
+                if (navLink) {
+                    navLinks.forEach(nl => nl.classList.remove('active'));
+                    navLink.classList.add('active');
+                }
+            }
+        });
+    }, observerOptions);
+    
+    sections.forEach(section => observer.observe(section));
+});
+</script>
+{% endblock %}
